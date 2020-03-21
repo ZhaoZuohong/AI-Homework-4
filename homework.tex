@@ -1,0 +1,47 @@
+\documentclass[UTF8,zihao=-4]{ctexart}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{forest}
+\usepackage{tikz}
+\lstset{
+	language=C++,
+	breaklines,
+	tabsize=4,
+	basicstyle=\ttfamily \small
+}
+\geometry{a4paper,centering,scale=0.8}
+\title{\heiti 人工智能\quad 第三次作业}
+\author{PB17000005\quad \CJKfontspec{AR PL UKai CN} 赵作竑}
+\date{\kaishu \today}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item[7.13]
+		\begin{enumerate}
+			\item[a.]题目可以由标准的逻辑等价进行证明：
+			\begin{align*}
+				((P_1\wedge \cdots \wedge P_m) \Rightarrow Q) &\equiv (\neg (P_1\wedge \cdots \wedge P_m) \vee Q) \\
+				\neg ((P_1\wedge \cdots \wedge P_{m-1}) \wedge P_m) &\equiv (\neg (P_1\wedge \cdots \wedge P_{m-1})\vee(\neg P_m)) \\
+				&\cdots \\
+				(\neg (P_1\wedge \cdots \wedge P_m)) &\equiv (P_1 \vee \cdots \vee P_m) \\
+				((P_1\wedge \cdots \wedge P_m) \Rightarrow Q) &\equiv (P_1 \vee \cdots \vee P_m \vee Q) \\
+			\end{align*}
+			从而子句$(P_1 \vee \cdots \vee P_m \vee Q)$逻辑等价于蕴含语句$(P_1\wedge \cdots \wedge P_m) \Rightarrow Q$。
+			\item[b.]由上一问，我们知道$(P_1\wedge \cdots \wedge P_m)\Rightarrow (Q_1\vee \cdots \vee Q_n)$逻辑等价于
+			\begin{equation*}
+				P_1\vee \cdots \vee P_m \vee Q_1 \vee \cdots \vee Q_n
+			\end{equation*}
+			因为命题逻辑的每个语句逻辑都等价于某子句的合取式，而合取式也等价于某种蕴含语句，所以只要把语句转化为合取范式，再从合取范式转换成蕴含范式，就就完成了每个子句到蕴含范式的转换。
+			\item[c.]我认为可以分三个步骤：第一步，把所有蕴含范式写成合取范式的形式；第二步，按照合取范式的归结算法进行归结；第三步，将得到的结果转换为蕴含范式。
+		\end{enumerate}
+		\pagebreak
+		\item[证明题]证明Forward Chaining Algorithm的完备性：
+		
+		每个被蕴涵的原子语句都可以推导得出。验证这一点的最简单的方法是考察\textit{inferred}表的最终状态（在算法到达\textsf{不动点}以后，不会再出现新的推理）。该表把推导出的每个符号设为\textit{true}，而其他符号为\textit{false}。可以把此表看作一个逻辑模型；而且，原始\textit{KB}中的每个限定子句在该模型中都为真。为了看清这一点，假定相反情况成立，即某个字句$a_1\wedge \cdots \wedge a_k \Rightarrow b$在此模型下为假。那么$a_1\wedge \cdots \wedge a_k$在模型中必须为真，$b$必须为假。但这和我们的假设即算法已经到达一个不动点相矛盾！因而可以得出结论，在不动点推导出的原子语句集定义了原始\textit{KB}的一个模型。更进一步，被\textit{KB}蕴涵的任一原子语句$q$在它的所模型中为真，尤其是这个模型。因此，每个被蕴涵的语句$q$必定会被算法推导出来。
+	\end{enumerate}
+\end{document}
